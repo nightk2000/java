@@ -4,7 +4,7 @@ Linux：
 `jmap -heap [pid]`
 
 
-线程快照信息导出
+线程快照信息导出，须先切换到该线程所属用户
 Linux：
 
 `jstack -l [pid] > /usr/local/tomcat/[pid].stack`
