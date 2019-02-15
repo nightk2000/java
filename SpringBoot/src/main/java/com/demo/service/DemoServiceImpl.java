@@ -1,0 +1,40 @@
+package com.demo.service;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.dao.DemoDao;
+import com.demo.interfaces.DemoService;
+
+@Service
+public class DemoServiceImpl implements DemoService {
+
+	@Autowired
+	DemoDao demoDao;
+	
+	@Override
+	public Object obj(String... keys) {
+		return keys;
+	}
+
+	@Override
+	public String str(String... keys) {
+		return Arrays.toString(keys);
+	}
+
+	@Override
+	public List<?> tables(int index) {
+		if( index==1 ) {
+			return demoDao.tables1();
+		}else if( index==2 ) {
+			return demoDao.tables2();
+		}else {
+			return demoDao.tables();
+		}
+	}
+
+	
+}
