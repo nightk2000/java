@@ -21,19 +21,19 @@ if( Origin!=null && Origin.indexOf("test.com")>=0 ){
 3、ajax如何携带跨域Cookie
 ```
 $.ajax({
-	type: "POST",
-	url: '',
-	data: {},
-	dataType:"json",
-	xhrFields: {// 添加此项配置
-		withCredentials: true  //设置为true
-	},
-	success: function(json){
-	},
-	complete :function(XMLHttpRequest, textStatus){
-	},
-	error:function(XMLHttpRequest, textStatus, errorThrown){
-	}
+    type: "POST",
+    url: '',
+    data: {},
+    dataType:"json",
+    xhrFields: {// 添加此项配置
+        withCredentials: true  //设置为true
+    },
+    success: function(json){
+    },
+    complete :function(XMLHttpRequest, textStatus){
+    },
+    error:function(XMLHttpRequest, textStatus, errorThrown){
+    }
 });
 ```
 
