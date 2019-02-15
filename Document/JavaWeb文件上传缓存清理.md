@@ -11,7 +11,7 @@
 //检查文件上传请求是否为切片请求
 boolean isMultipart = ServletFileUpload.isMultipartContent(request);  
 if (!isMultipart) {
-	return;
+    return;
 }
 // 获取缓存目录路径
 String tempDirectory = this.getServletContext().getRealPath("upload/temp") + "/";
@@ -29,9 +29,9 @@ upload.setProgressListener(new FileUploadProgressListener());
 // 解析请求
 List items = null;
 try {
-	items = upload.parseRequest(request);
+    items = upload.parseRequest(request);
 } catch (FileUploadException e1) {
-	e1.printStackTrace();
+    e1.printStackTrace();
 }
         
 // 文件上传处理
@@ -39,49 +39,49 @@ Iterator iter = items.iterator();
 Map<String,String> formMap = new HashMap<String,String>();
 while (iter.hasNext())
 {
-	FileItem item = (FileItem)iter.next();
-	//整个表单的所有域都会被解析，要先判断一下是普通表单域还是文件上传域
-	if (item.isFormField()) {
-		// fileName   //指定文件名称
-		// fileType   //指定文件扩展名
-		formMap.put(item.getFieldName(), item.getString());
-	} else {
-		String contentType = item.getContentType();
-		long sizeInBytes = item.getSize();
-		//String fieldName = item.getFieldName();
-		String itemName = item.getName();
-		//boolean isInMem = item.isInMemory();
-		//System.out.println(fieldName + ":" + fileName);
-		//System.out.println("类型：" + contentType);
-		//System.out.println("是否在内在：" + isInMem);
-		//System.out.println("文件大小" + sizeInBytes);
-               
-		if( sizeInBytes > 1048576*5 ){    //文件最大限制 5M， 1024*1024=1048576
-			item.delete();    // 未处理缓存文件，手动删除
-			Result.Failed(ResCode.Fail, "文件大小限制 1M");
-			return;
-		}
+    FileItem item = (FileItem)iter.next();
+    //整个表单的所有域都会被解析，要先判断一下是普通表单域还是文件上传域
+    if (item.isFormField()) {
+        // fileName   //指定文件名称
+        // fileType   //指定文件扩展名
+        formMap.put(item.getFieldName(), item.getString());
+    } else {
+        String contentType = item.getContentType();
+        long sizeInBytes = item.getSize();
+        //String fieldName = item.getFieldName();
+        String itemName = item.getName();
+        //boolean isInMem = item.isInMemory();
+        //System.out.println(fieldName + ":" + fileName);
+        //System.out.println("类型：" + contentType);
+        //System.out.println("是否在内存：" + isInMem);
+        //System.out.println("文件大小" + sizeInBytes);
 
-		System.out.println( String.format("%s fileName: %s, contentType: %s", DateUtil.now(), itemName, contentType) );
-               
-		//获取文件扩展名
-		String ext = null;
-		if( itemName.lastIndexOf(".")>0 ){
-			ext = itemName.substring(itemName.lastIndexOf("."));
-		}
-               
-		if( /*判断文件类型*/ ){    //不允许的文件类型
-			item.delete();    // 未处理缓存文件，手动删除
-			Result.Failed(ResCode.Fail, "不允许的文件类型");
-			return;
-		}
+        if( sizeInBytes > 1048576*5 ){    //文件最大限制 5M， 1024*1024=1048576
+            item.delete();    // 未处理缓存文件，手动删除
+            Result.Failed(ResCode.Fail, "文件大小限制 1M");
+            return;
+        }
 
-		/**
-		 * TODO io相关文件写盘操作代码段
-		 */
+        System.out.println( String.format("%s fileName: %s, contentType: %s", DateUtil.now(), itemName, contentType) );
                
-		//上传成功，返回文件url
-		return;
-	}
+        //获取文件扩展名
+        String ext = null;
+        if( itemName.lastIndexOf(".")>0 ){
+            ext = itemName.substring(itemName.lastIndexOf("."));
+        }
+               
+        if( /*判断文件类型*/ ){    //不允许的文件类型
+            item.delete();    // 未处理缓存文件，手动删除
+            Result.Failed(ResCode.Fail, "不允许的文件类型");
+            return;
+        }
+
+        /**
+         * TODO io相关文件写盘操作代码段
+         */
+               
+        //上传成功，返回文件url
+        return;
+    }
 }
 ```
