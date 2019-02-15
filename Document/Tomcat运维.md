@@ -7,7 +7,8 @@ Linux：
 线程快照信息导出，须先切换到该线程所属用户
 Linux：
 
-`jstack -l [pid] > /usr/local/tomcat/[pid].stack`
+`jstack -l [-F] [pid] > /usr/local/tomcat/[pid].stack`
+-F为可选参数
 
 
 查看进程内哪个线程(子进程)CPU占用最高
