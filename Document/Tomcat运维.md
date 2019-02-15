@@ -8,6 +8,7 @@ Linux：
 Linux：
 
 `jstack -l [-F] [pid] > /usr/local/tomcat/[pid].stack`
+
 -F为可选参数
 
 
