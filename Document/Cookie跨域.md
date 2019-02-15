@@ -45,4 +45,4 @@ xhr.withCredentials = true;    // 只需要在send之前设置xhr.withCredential
 xhr.send(new FormData());
 ```
 
-设置好之后，配合hosts文件修改，即可任性调试前后端分离式系统了
+设置好之后，配合hosts文件修改，即可调试前后端分离式系统
