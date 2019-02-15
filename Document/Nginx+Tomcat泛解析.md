@@ -32,7 +32,7 @@ tomcat:
 
 <!-- name必须与Engine.defaultHost一致-->
 <Host name="localhost"  appBase="webapps/项目部署文件夹" ...>
-<Context path="" reloadable="false" docBase="" />
+    <Context path="" reloadable="false" docBase="" />
 </Host>
 ```
 至于一个tomcat只有一个defaultHost怎么部署多个泛解析项目，只需要配置多个Service即可，
