@@ -1,3 +1,4 @@
+
 tomcat本身不支持域名泛解析，所以需要使用泛解析的项目无法完成正常部署；
 
 在这种情况下，通过nginx转发到tomcat，可以间接实现泛解析；
@@ -7,7 +8,10 @@ tomcat本身不支持域名泛解析，所以需要使用泛解析的项目无�
 这样我们可以将localhost作为我们泛解析项目的部署位置。
 
 具体配置如下：
+
 nginx:
+
+```
 server {
     listen 80;
     server_name *.xxx.com;
@@ -20,14 +24,16 @@ server {
         proxy_pass http://127.0.0.1:8080/;   #这里填写对应tomcat中localhost的访问路径
     }
 }
-
+```
 tomcat:
+
+```
 <Engine defaultHost="localhost" .../>
 
 <!-- name必须与Engine.defaultHost一致-->
 <Host name="localhost"  appBase="webapps/项目部署文件夹" ...>
 <Context path="" reloadable="false" docBase="" />
 </Host>
-
+```
 至于一个tomcat只有一个defaultHost怎么部署多个泛解析项目，只需要配置多个Service即可，
 每个Service都需绑定一个新端口，这样就可以通过nginx转发到多个端口达到多个泛解析项目的目的。
