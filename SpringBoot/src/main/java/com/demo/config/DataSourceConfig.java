@@ -29,13 +29,14 @@ public class DataSourceConfig {
 
     @Bean(name = "twoDataSource")
     @Qualifier("twoDataSource")
-    @Primary
+
     @ConfigurationProperties(prefix="spring.datasource.two")
     public DataSource twoDataSource() {
         return DataSourceBuilder.create().build();
     }
     
     @Bean(name = "mainJdbcTemplate")
+    @Primary
     public JdbcTemplate mianJdbcTemplate(
             @Qualifier("mainDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
