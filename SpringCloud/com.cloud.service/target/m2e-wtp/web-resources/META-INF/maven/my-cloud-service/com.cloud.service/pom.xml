@@ -70,10 +70,15 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-		<!-- Refresh 配置自动刷新支持 -->
+		<!-- Refresh 配置自动刷新支持 RefreshScope  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- springcloud-bus依赖实现配置自动更新，rabbitmq -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
 		</dependency>
 		<!-- 断路器 -->
 		<dependency>

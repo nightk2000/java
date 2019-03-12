@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,10 +16,14 @@ import com.cloud.config.MyConfig;
 import com.cloud.feign.MathClient;
 
 @RestController
+@RefreshScope		// 开启自动刷新配置
 public class TestController {
 
 	@Value("${spring.config.demo}")
 	private String str;
+	
+	@Value("${my.data.date}")
+	private String date;
 	
 	@Autowired
 	MathClient mathClient;
@@ -26,7 +31,8 @@ public class TestController {
 	@RequestMapping("/config.json")
 	public Object config(HttpServletRequest req,HttpServletResponse res)
 	{
-		return JSONObject.toJSON(str);
+		String[] g = {str,date};
+		return JSONObject.toJSON(g);
 	}
 	
 	@ResponseBody

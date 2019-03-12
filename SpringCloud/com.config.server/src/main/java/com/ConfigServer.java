@@ -23,6 +23,15 @@ public class ConfigServer extends SpringBootServletInitializer {
 	}
     
 	/**
+	 * 自动刷新方式：http://DiscoveryClient-IP:port/actuator/bus-refresh method:POST bodytype:raw
+	 * 调用后会重启 DiscoveryClient 
+	 * -> Shutting down DiscoveryClient
+	 * -> Unregistering ...
+	 * -> Registered Applications size is zero : true
+	 * -> Starting heartbeat executor: renew interval is: 30
+	 */
+	
+	/**
 	 * 如果使用git服务，则可将 ConfigServer 集成到 EurekaServer 中
 	 * 
 	 */
