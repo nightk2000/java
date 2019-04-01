@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cloud.dao.DemoDao;
 import com.cloud.interfaces.DemoService;
@@ -25,8 +26,9 @@ public class DemoServiceImpl implements DemoService {
 		return Arrays.toString(keys);
 	}
 
+	@Transactional(value="txManager")	// 事务管理支持
 	@Override
-	public List<?> tables(int index) {
+	public List<?> tables(int index){
 		if( index==1 ) {
 			return demoDao.tables1();
 		}else if( index==2 ) {
@@ -35,6 +37,5 @@ public class DemoServiceImpl implements DemoService {
 			return demoDao.tables();
 		}
 	}
-
 	
 }

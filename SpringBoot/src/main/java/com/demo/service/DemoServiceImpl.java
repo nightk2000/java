@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.demo.dao.DemoDao;
 import com.demo.interfaces.DemoService;
@@ -37,4 +38,11 @@ public class DemoServiceImpl implements DemoService {
 	}
 
 	
+	@Transactional(value="txManager",rollbackFor = {IllegalArgumentException.class})	// 事务管理支持
+	@Override
+	public void testTransactional() {
+		demoDao.insert("id","name","user","type","company");
+		demoDao.insert("id1","name1","user1","type1","company1");
+		throw new IllegalArgumentException("回滚");
+	}
 }

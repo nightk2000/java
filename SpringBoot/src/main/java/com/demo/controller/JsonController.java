@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
 import com.demo.aop.AopHandle;
+import com.demo.config.MyConfig;
 import com.demo.interfaces.DemoService;
 
 @RestController
@@ -16,6 +18,15 @@ public class JsonController {
 
 	@Autowired
 	DemoService demoService;
+	
+	@Autowired
+	MyConfig myConfig;
+	
+	@RequestMapping("/config.json")
+	public Object config(HttpServletRequest req,HttpServletResponse res)
+	{
+		return JSONObject.toJSON(myConfig);
+	}
 	
 	@RequestMapping("/body.json")
 	public Object json(HttpServletRequest req,HttpServletResponse res)

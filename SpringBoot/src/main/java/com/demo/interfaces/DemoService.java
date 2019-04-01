@@ -9,4 +9,6 @@ public interface DemoService {
 	public String str(String... keys);
 	
 	public List<?> tables(int index);
+	
+	public void testTransactional();
 }

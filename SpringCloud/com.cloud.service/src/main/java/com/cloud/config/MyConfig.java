@@ -5,7 +5,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource(value= {"my.properties"})
+@PropertySource("classpath:my.properties")
 public class MyConfig {
 
 	

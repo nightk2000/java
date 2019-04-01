@@ -58,4 +58,9 @@ public class DemoDao {
 		List<?> list = jdbcTemplate2.queryForList(sql);
 		return list;
 	}
+	
+	public void insert(Object...params) {
+		String sql = "insert into m_weixin values(?,?,?,?,?);";
+		jdbcTemplate.update(sql,params);
+	}
 }

@@ -3,16 +3,29 @@ package com.demo.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
-@Configuration
+//@Configuration
+@SpringBootConfiguration
 public class DataSourceConfig {
 
+    @Bean(name = "txManager")  // 创建事务管理器,给事务管理器命名，多数据源需指定数据源
+    public PlatformTransactionManager txManager(@Qualifier("mainDataSource") DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+    
+    @Bean(name = "tx1Manager")  // 创建事务管理器,给事务管理器命名，多数据源需指定数据源
+    public PlatformTransactionManager tx1Manager(@Qualifier("oneDataSource") DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+    
     @Bean(name = "mainDataSource")
     @Qualifier("mainDataSource")
     @ConfigurationProperties(prefix="spring.datasource")
@@ -29,28 +42,24 @@ public class DataSourceConfig {
 
     @Bean(name = "twoDataSource")
     @Qualifier("twoDataSource")
-
     @ConfigurationProperties(prefix="spring.datasource.two")
     public DataSource twoDataSource() {
         return DataSourceBuilder.create().build();
     }
     
     @Bean(name = "mainJdbcTemplate")
-    @Primary
-    public JdbcTemplate mianJdbcTemplate(
-            @Qualifier("mainDataSource") DataSource dataSource) {
+    @Primary	// 多数据源，此注解指定一个主数据源
+    public JdbcTemplate mianJdbcTemplate(@Qualifier("mainDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
     @Bean(name = "oneJdbcTemplate")
-    public JdbcTemplate oneJdbcTemplate(
-            @Qualifier("oneDataSource") DataSource dataSource) {
+    public JdbcTemplate oneJdbcTemplate(@Qualifier("oneDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
     
     @Bean(name = "twoJdbcTemplate")
-    public JdbcTemplate twoJdbcTemplate(
-            @Qualifier("twoDataSource") DataSource dataSource) {
+    public JdbcTemplate twoJdbcTemplate(@Qualifier("twoDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }
