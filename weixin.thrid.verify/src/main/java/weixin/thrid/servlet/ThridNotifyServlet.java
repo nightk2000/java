@@ -1,14 +1,12 @@
 package weixin.thrid.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,11 +14,13 @@ import weixin.thrid.config.WeixinConfig;
 import weixin.thrid.util.ReaderUtil;
 import weixin.thrid.util.WeixinSecurity;
 
-@WebServlet(name="WeixinMessage",urlPatterns={"/weixin/message/*", "/weixin/message.do"}, description="")
-public class ThridNotifyServlet extends HttpServlet {
+/**
+ * 授权消息回调
+ */
+@WebServlet(name="AuthMessage",urlPatterns={"/weixin/auth/message.do"}, description="")
+public class ThridNotifyServlet extends BaseServlet {
 
 	private static final long serialVersionUID = -8481211900611878537L;
-	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
@@ -77,21 +77,4 @@ public class ThridNotifyServlet extends HttpServlet {
 		super.doGet(req, resp);
 	}
 	
-	protected static final void outText(HttpServletRequest req, HttpServletResponse res, String body)
-	{
-		outPrint(req, res, "text/plain;charset=utf-8", body);
-	}
-	private static final void outPrint(HttpServletRequest req, HttpServletResponse res,String contentType, String body)
-	{
-		res.setContentType(contentType);
-		//res.setCharacterEncoding("utf-8");
-		try{
-			PrintWriter out = res.getWriter();
-			out.println( body );
-			out.flush();
-			out.close();
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-	}
 }
