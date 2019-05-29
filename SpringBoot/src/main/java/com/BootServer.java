@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication		// 注册 SpringBoot 启动类
 @EnableTransactionManagement			// 开启事务管理
 //@EnableAsync(proxyTargetClass=true)		// 配置代理为cglib代理，默认使用 的是jdk动态代理
+@ServletComponentScan		// 支持扫描 Servlet3.0 注解
 public class BootServer extends SpringBootServletInitializer {
 
 	@Override
