@@ -21,10 +21,10 @@ public class App
 	 */
 	private static final String dir = "E:\\ml-10M100K\\ratings.dat";
 	
-	private static final String url = "jdbc:mysql://rm-bp1jmddrwdpiq293eyo.mysql.rds.aliyuncs.com:3306/draw";
+	private static final String url = "jdbc:mysql://127.0.0.1:3306/draw";
 	private static final String db  = "draw";
-	private static final String user= "bagiot";
-	private static final String pass= "Bagiot20210306";
+	private static final String user= "root";
+	private static final String pass= "root";
 	
 	private static MahoutApi api = new MahoutApi();
 	
